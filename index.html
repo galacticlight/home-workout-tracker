@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0f0f0f" />
+  <meta name="description" content="Offline home workout tracker with PR highlighting and pinned heuristics" />
+  <link rel="manifest" href="manifest.json" />
+  <title>Home Workout Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <h1>Home Tracker</h1>
+      <div class="header-actions">
+        <button id="btn-export" class="icon-btn" title="Export data">⬇</button>
+        <button id="btn-import" class="icon-btn" title="Import data">⬆</button>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="dashboard">Home</button>
+      <button class="tab" data-tab="log">Log</button>
+      <button class="tab" data-tab="routines">Routines</button>
+      <button class="tab" data-tab="progress">Progress</button>
+      <button class="tab" data-tab="history">History</button>
+    </nav>
+
+    <main id="content">
+      <!-- Dynamic content -->
+    </main>
+
+    <!-- Rest Timer Overlay -->
+    <div id="rest-timer" class="rest-overlay hidden">
+      <div class="rest-box">
+        <div id="rest-time">90</div>
+        <div class="rest-label">Rest</div>
+        <button id="rest-skip" class="btn">Skip</button>
+      </div>
+    </div>
+
+    <!-- PR Celebration -->
+    <div id="pr-toast" class="pr-toast hidden">
+      <div class="pr-icon">🏆</div>
+      <div class="pr-text">
+        <strong>New PR!</strong>
+        <span id="pr-detail"></span>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="import-file" accept=".json" hidden />
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(console.error);
+    }
+  </script>
+</body>
+</html>
